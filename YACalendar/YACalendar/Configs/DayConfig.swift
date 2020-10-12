@@ -11,6 +11,7 @@ import UIKit
 open class DayConfig {
     
     public var textAlignment: NSTextAlignment = .center
+    public var circleColorHex: String = "#152334"
     
     public let formetter: DateFormatter = {
         let formetter = DateFormatter()
@@ -24,7 +25,7 @@ open class DayConfig {
         case (_, .startRange), (_, .endRange), (_, .startRangeFilled): return .white
         case (_, .disabled): return UIColor(displayP3Red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1)
         case (_, .inRange): return .black
-        case (.today, _): return .black
+        case (.today, _): return .white
         case (.none, _): return .black
         default: return UIColor(displayP3Red: 188 / 255, green: 188 / 255, blue: 188 / 255, alpha: 1)
         }
@@ -41,8 +42,32 @@ open class DayConfig {
         return 0
     }
     
+    // MARK: - Hex to UIColor converter
+    public func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+        
+        var rgbValue:UInt64 = 0
+        Scanner(string: cString).scanHexInt64(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
     public func indicatorColor(for state: DayState, indicator: DayIndicator) -> UIColor {
         switch (state, indicator) {
+        case (.today, _): return hexStringToUIColor(hex: circleColorHex)
         case (_, .selected): return UIColor(displayP3Red: 247 / 255, green: 101 / 255, blue: 48 / 255, alpha: 1.0)
         case (_, .startRange), (_, .endRange), (_, .startRangeFilled): return .black
         case (_, .inRange): return UIColor.black.withAlphaComponent(0.15)
