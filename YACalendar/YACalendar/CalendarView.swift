@@ -339,7 +339,7 @@ public class CalendarView: UIView {
                 if tappedMonth.containsDate(selectedDate) {
                     calendarDelegate?.didSelectDate?(selectedDate)
                 } else {
-                    calendarDelegate?.didSelectDate?(tappedMonth.endMonthDate)
+                    calendarDelegate?.didSelectDate?(tappedMonth.startMonthDate)
                 }
             } else {
                 calendarDelegate?.didSelectDate?(tappedMonth.startMonthDate)
