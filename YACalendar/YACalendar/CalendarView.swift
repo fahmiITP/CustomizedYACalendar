@@ -336,7 +336,11 @@ public class CalendarView: UIView {
             let tappedPointInWeek = sender.location(in: tappedWeek?.view)
             let selectedDay = tappedWeek?.days.first(where: { $0.rect.contains(tappedPointInWeek) })
             if let selectedDate = selectedDay?.date {
-                calendarDelegate?.didSelectDate?(selectedDate)
+                if tappedMonth.containsDate(selectedDate) {
+                    calendarDelegate?.didSelectDate?(selectedDate)
+                } else {
+                    calendarDelegate?.didSelectDate?(tappedMonth.startMonthDate)
+                }
             } else {
                 calendarDelegate?.didSelectDate?(tappedMonth.startMonthDate)
             }
