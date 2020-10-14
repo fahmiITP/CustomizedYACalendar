@@ -26,7 +26,7 @@ open class MonthHeaderConfig {
         switch calendarType {
         case .oneOnOne: return UIFont.systemFont(ofSize: 18, weight: .medium)
         case .twoOnThree: return UIFont.systemFont(ofSize: 18, weight: .semibold)
-        case .threeOnFour: return UIFont.systemFont(ofSize: 14, weight: .semibold)
+        case .threeOnFour: return UIFont.systemFont(ofSize: 13, weight: .semibold)
         }
     }
 }
