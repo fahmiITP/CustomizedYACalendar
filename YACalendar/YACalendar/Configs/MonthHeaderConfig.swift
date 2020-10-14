@@ -22,7 +22,7 @@ open class MonthHeaderConfig {
         return formetter
     }()
 
-    public func font(for calendarType: CalendarType) -> UIFont {
+    open func font(for calendarType: CalendarType) -> UIFont {
         switch calendarType {
         case .oneOnOne: return UIFont.systemFont(ofSize: 18, weight: .medium)
         case .twoOnThree: return UIFont.systemFont(ofSize: 18, weight: .semibold)
