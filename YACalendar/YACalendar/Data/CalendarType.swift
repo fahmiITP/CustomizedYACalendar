@@ -49,7 +49,7 @@ public enum CalendarType {
         switch self {
         case .oneOnOne: return UIEdgeInsets(top: 6, left: 8, bottom: 17, right: 6)
         case .twoOnThree: return UIEdgeInsets(top: 4, left: 4, bottom: 2, right: 4)
-        case .threeOnFour: return UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)
+        case .threeOnFour: return UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
         }
     }
     
