@@ -23,7 +23,7 @@ public enum CalendarType {
         case .oneOnOne where isMaxScreen: size.width = 366
         case .oneOnOne: size.width = 320
         case .twoOnThree: size.width = 164
-        case .threeOnFour: size.width = 110
+        case .threeOnFour: size.width = (UIScreen.main.bounds.width - 41) / 3
         }
         
         return size
@@ -49,7 +49,7 @@ public enum CalendarType {
         switch self {
         case .oneOnOne: return UIEdgeInsets(top: 6, left: 8, bottom: 17, right: 6)
         case .twoOnThree: return UIEdgeInsets(top: 4, left: 4, bottom: 2, right: 4)
-        case .threeOnFour: return UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
+        case .threeOnFour: return UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)
         }
     }
     
