@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "YACalendar"
-  spec.version      = "0.0.5"
+  spec.version      = "0.0.6"
   spec.summary      = "iOS Calendar"
 
   spec.description  = <<-DESC 

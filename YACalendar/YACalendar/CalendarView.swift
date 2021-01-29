@@ -10,7 +10,7 @@ import UIKit
 
 @objc
 public protocol CalendarViewDelegate: class {
-    @objc optional func didSelectDate(_ date: Date)
+    @objc optional func didSelectDate(_ date: Date, isProperDateSelected: Bool)
     @objc optional func didSelectRange(_ startDate: Date, endDate: Date)
     @objc optional func didUpdateDisplayedDate(_ date: Date)
     @objc optional func didChangeOrientation(_ isPortrait: Bool)
@@ -280,7 +280,7 @@ public class CalendarView: UIView {
                 
                 day.select()
                 day.view?.configure(with: config.day, day: day, calendarType: grid.calendarType)
-                calendarDelegate?.didSelectDate?(day.date)
+                calendarDelegate?.didSelectDate?(day.date, isProperDateSelected: true)
 
             case .range:
                 let allDays = data.allDays
@@ -328,7 +328,7 @@ public class CalendarView: UIView {
             case .many:
                 day.select()
                 day.view?.configure(with: config.day, day: day, calendarType: grid.calendarType)
-                calendarDelegate?.didSelectDate?(day.date)
+                calendarDelegate?.didSelectDate?(day.date, isProperDateSelected: true)
             }
         } else {
             let tappedPointInMonth = sender.location(in: tappedMonth.view)
@@ -336,13 +336,13 @@ public class CalendarView: UIView {
             let tappedPointInWeek = sender.location(in: tappedWeek?.view)
             let selectedDay = tappedWeek?.days.first(where: { $0.rect.contains(tappedPointInWeek) })
             if let selectedDate = selectedDay?.date {
-                if tappedMonth.containsDate(selectedDate) {
-                    calendarDelegate?.didSelectDate?(selectedDate)
+                if tappedMonth.containsDate(selectedDate) && tappedWeek != nil {
+                    calendarDelegate?.didSelectDate?(selectedDate, isProperDateSelected: true)
                 } else {
-                    calendarDelegate?.didSelectDate?(tappedMonth.startMonthDate)
+                    calendarDelegate?.didSelectDate?(tappedMonth.startMonthDate, isProperDateSelected: false)
                 }
             } else {
-                calendarDelegate?.didSelectDate?(tappedMonth.startMonthDate)
+                calendarDelegate?.didSelectDate?(tappedMonth.startMonthDate, isProperDateSelected: false)
             }
         }
     }

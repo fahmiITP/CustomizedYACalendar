@@ -89,7 +89,8 @@ class ViewController: UIViewController {
 
 extension ViewController: CalendarViewDelegate {
     
-    func didSelectDate(_ date: Date) {
+    func didSelectDate(_ date: Date, isProperDateSelected: Bool) {
+        print(date, isProperDateSelected)
         if viewType == .year {
             viewType = .month
             calendarView.currentDate = date
